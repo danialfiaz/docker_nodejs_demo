@@ -46,7 +46,11 @@ jobs:
       run: |
         # sed -i "s/image:.*/image: $ECR_REGISTRY\/$ECR_REPOSITORY:$IMAGE_TAG/" values.yaml
         #sed -i "s/tag:.*/tag: $IMAGE_TAG/" values.yaml
-        yq eval ".tag = \"$IMAGE_TAG\"" values.yaml > values_tmp.yaml && mv values_tmp.yaml values.yaml
+        # Extract the current tag value from values.yaml
+        CURRENT_TAG=$(awk '/^\s*tag:/ {print $2}' values.yaml)
+        # Replace the tag value with the new image tag
+        sed -i "s/^ *tag: $CURRENT_TAG/tag: $IMAGE_TAG/" values.yaml
+
         
     # - name: Commit and push changes
     #   run: |

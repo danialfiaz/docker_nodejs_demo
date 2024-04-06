@@ -38,7 +38,7 @@ jobs:
     - name: Checkout other repository
       uses: actions/checkout@v2
       with:
-        repository: danialfiaz/simple-app  # Replace with your other repository path
+        repository: danialfiaz/simple-app-demo  # Replace with your other repository path
         #ref: ${{ github.ref }}  # master  # Specify the branch or commit to check out
 
     - name: Update values.yaml with new image tag

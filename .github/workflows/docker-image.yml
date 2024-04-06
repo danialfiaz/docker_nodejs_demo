@@ -31,3 +31,23 @@ jobs:
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+    - name: Checkout other repository
+      uses: actions/checkout@v2
+      with:
+        repository: danialfiaz/simple-app  # Replace with your other repository path
+        ref: ${{ github.ref }}  # master  # Specify the branch or commit to check out
+
+    - name: Update values.yaml with new image tag
+      run: |
+        sed -i "s/imageTag:.*/imageTag: ${{ steps.docker_build.outputs.tag }}/" values.yaml
+        working-directory: ${{ github.workspace }} # path/to/cloned/other-repo  # Specify the directory of the cloned repository
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.email "daniafiaz96@gmail.com"
+        git config --global user.name "danialfiaz"
+        git add .
+        git commit -m "Update imageTag in values.yaml"
+        git push origin master  # or the appropriate branch
+      working-directory: ${{ github.workspace }} # path/to/cloned/other-repo

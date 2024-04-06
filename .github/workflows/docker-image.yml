@@ -54,7 +54,8 @@ jobs:
         git commit -m "Update imageTag in values.yaml"
         git push origin master  # or the appropriate branch
       env:
-        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        # GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     # - name: Commit and push changes
     #   uses: stefanzweifel/git-auto-commit-action@v4
@@ -65,4 +66,4 @@ jobs:
     #     branch: master
     #     # force_add: true
     #   env:
-    #     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -44,8 +44,8 @@ jobs:
 
     - name: Update values.yaml with new image tag
       run: |
-        sed -i "s/image:.*/image: $ECR_REGISTRY\/$ECR_REPOSITORY:$IMAGE_TAG-ELASTIC/" values.yaml
-        # working-directory: ${{ github.workspace }} # path/to/cloned/other-repo  # Specify the directory of the cloned repository
+        # sed -i "s/image:.*/image: $ECR_REGISTRY\/$ECR_REPOSITORY:$IMAGE_TAG-ELASTIC/" values.yaml
+        sed -i -e "s/^\(  tag:\).*/\$IMAGE_TAG/" values.yaml
         
     # - name: Commit and push changes
     #   run: |
@@ -77,6 +77,5 @@ jobs:
     #     commit_user_name: "danialfiaz"
     #     commit_user_email: "danialfiaz96@gmail.com"
     #     branch: master
-    #     # force_add: true
     #   env:
     #     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}

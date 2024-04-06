@@ -40,7 +40,7 @@ jobs:
 
     - name: Update values.yaml with new image tag
       run: |
-        sed -i "s/imageTag:.*/imageTag: ${{ steps.docker_build.outputs.tag }}/" values.yaml
+        sed -i "s/image:.*/image: $ECR_REGISTRY\/$ECR_REPOSITORY:$IMAGE_TAG/" values.yaml
         working-directory: ${{ github.workspace }} # path/to/cloned/other-repo  # Specify the directory of the cloned repository
 
     - name: Commit and push changes

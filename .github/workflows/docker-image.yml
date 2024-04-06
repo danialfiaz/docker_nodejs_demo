@@ -40,7 +40,7 @@ jobs:
       with:
         repository: danialfiaz/simple-app-demo  # Replace with your other repository path
         #ref: ${{ github.ref }}  # master  # Specify the branch or commit to check out
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.ACCESS_TOKEN }}
 
     - name: Update values.yaml with new image tag
       run: |
@@ -79,4 +79,4 @@ jobs:
         branch: master
         # force_add: true
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}

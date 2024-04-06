@@ -36,31 +36,31 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: danialfiaz/simple-app  # Replace with your other repository path
-        ref: ${{ github.ref }}  # master  # Specify the branch or commit to check out
+        #ref: ${{ github.ref }}  # master  # Specify the branch or commit to check out
 
     - name: Update values.yaml with new image tag
       run: |
         sed -i "s/image:.*/image: $ECR_REGISTRY\/$ECR_REPOSITORY:$IMAGE_TAG/" values.yaml
         # working-directory: ${{ github.workspace }} # path/to/cloned/other-repo  # Specify the directory of the cloned repository
 
-    - name: Commit and push changes
-      run: |
-        git config --global user.email "daniafiaz96@gmail.com"
-        git config --global user.name "danialfiaz"
-        git add .
-        git commit -m "Update imageTag in values.yaml"
-        git push origin master  # or the appropriate branch
-      # working-directory: ${{ github.workspace }} # path/to/cloned/other-repo
-      env:
-        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-    
     # - name: Commit and push changes
-    #   uses: stefanzweifel/git-auto-commit-action@v4
-    #   with:
-    #     commit_message: "Update image tag in values.yaml"
-    #     commit_user_name: "danialfiaz"
-    #     commit_user_email: "danialfiaz96@gmail.com"
-    #     branch: master
-    #     # force_add: true
+    #   run: |
+    #     git config --global user.email "daniafiaz96@gmail.com"
+    #     git config --global user.name "danialfiaz"
+    #     git add .
+    #     git commit -m "Update imageTag in values.yaml"
+    #     git push origin master  # or the appropriate branch
+    #   # working-directory: ${{ github.workspace }} # path/to/cloned/other-repo
     #   env:
     #     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    
+    - name: Commit and push changes
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "Update image tag in values.yaml"
+        commit_user_name: "danialfiaz"
+        commit_user_email: "danialfiaz96@gmail.com"
+        branch: master
+        # force_add: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}

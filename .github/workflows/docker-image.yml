@@ -45,7 +45,7 @@ jobs:
     - name: Update values.yaml with new image tag
       run: |
         # sed -i "s/image:.*/image: $ECR_REGISTRY\/$ECR_REPOSITORY:$IMAGE_TAG/" values.yaml
-        sed -i "s/\(^\s*tag:\s*\).*/\1$IMAGE_TAG/" values.yaml
+        sed -i "s/tag:.*/tag: $IMAGE_TAG/" values.yaml
         
     # - name: Commit and push changes
     #   run: |

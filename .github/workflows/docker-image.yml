@@ -48,22 +48,22 @@ jobs:
         # sed -i "s/image:.*/image: $ECR_REGISTRY\/$ECR_REPOSITORY:$IMAGE_TAG/" values.yaml
         # sed -i "s/^  tag:.*/  tag: \"$IMAGE_TAG\"/g" values.yaml
         
-    - name: Commit and push changes
-      run: |
-        git config --global user.email "danialfiaz96@gmail.com"
-        git config --global user.name "danialfiaz"
-        git add .
-        git commit -m "Update imageTag in values.yaml"
-        git push origin master  # or the appropriate branch
-      env:
-        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-    
     # - name: Commit and push changes
-    #   uses: stefanzweifel/git-auto-commit-action@v4
-    #   with:
-    #     commit_message: "Update image tag in values.yaml"
-    #     commit_user_name: "danialfiaz"
-    #     commit_user_email: "danialfiaz96@gmail.com"
-    #     branch: master
+    #   run: |
+    #     git config --global user.email "danialfiaz96@gmail.com"
+    #     git config --global user.name "danialfiaz"
+    #     git add .
+    #     git commit -m "Update imageTag in values.yaml"
+    #     git push origin master  # or the appropriate branch
     #   env:
     #     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    
+    - name: Commit and push changes
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "Update image tag in values.yaml"
+        commit_user_name: "danialfiaz"
+        commit_user_email: "danialfiaz96@gmail.com"
+        branch: master
+      env:
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}

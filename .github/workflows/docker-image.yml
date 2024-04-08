@@ -35,12 +35,12 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-    - name: Checkout other repository
-      uses: actions/checkout@v2
-      with:
-        repository: danialfiaz/simple-app  # Replace with your other repository path
-        #ref: ${{ github.ref }}  # master  # Specify the branch or commit to check out
-        token: ${{ secrets.ACCESS_TOKEN }}
+    # - name: Checkout other repository
+    #   uses: actions/checkout@v2
+    #   with:
+    #     repository: danialfiaz/simple-app  # Replace with your other repository path
+    #     #ref: ${{ github.ref }}  # master  # Specify the branch or commit to check out
+    #     token: ${{ secrets.ACCESS_TOKEN }}
 
     - name: Update values.yaml with new image tag
       run: |

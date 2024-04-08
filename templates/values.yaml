@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   repository: wang/alpine-go-echo-server
   # sed -i -e "s/^\(  tag:\).*/\1 $CI_COMMIT_SHA/" ops/values.yaml
-  tag: 9fdf87117420ccc02b8a6ee9180b557c89ceaf85 
+  tag: 777154625678cb4063dcefa96708924a67e19b59 
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
